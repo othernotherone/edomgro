@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { invoke } from "@tauri-apps/api/core";
+  import { invoke } from "@tauri-apps/api/tauri";
   import { onMount } from "svelte";
 
-  let content = $state("");
-  let parsedContent = $state("");
+  let content = "";
+  let parsedContent = "";
 
   async function testParser() {
     try {
@@ -37,8 +37,8 @@
     <div class="editor-section">
       <h2>Editor</h2>
       <textarea
-        placeholder="Enter org-mode content here..."
         bind:value={content}
+        placeholder="Enter org-mode content here..."
         on:input={parseContent}
       />
     </div>
@@ -51,6 +51,13 @@
 </main>
 
 <style>
+  :global(body) {
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e1e;
+    color: #ffffff;
+  }
+
   .container {
     margin: 0;
     padding: 20px;
@@ -66,13 +73,13 @@
   h1 {
     text-align: center;
     margin: 0;
-    color: var(--text-color);
+    color: #ffffff;
   }
 
   h2 {
     margin-top: 0;
     margin-bottom: 10px;
-    color: var(--text-color);
+    color: #ffffff;
   }
 
   .editor-container {
@@ -93,64 +100,27 @@
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
     font-size: 14px;
     resize: none;
-    border: 1px solid var(--border-color);
+    border: 1px solid #333;
     border-radius: 4px;
-    background-color: var(--editor-bg);
-    color: var(--text-color);
+    background-color: #2d2d2d;
+    color: #ffffff;
   }
 
   textarea:focus {
     outline: none;
-    border-color: var(--accent-color);
+    border-color: #0078d4;
   }
 
   pre {
     flex: 1;
     margin: 0;
     padding: 10px;
-    background: var(--editor-bg);
-    border: 1px solid var(--border-color);
+    background: #2d2d2d;
+    border: 1px solid #333;
     border-radius: 4px;
     overflow: auto;
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
     font-size: 14px;
-    color: var(--text-color);
+    color: #ffffff;
   }
-
-  :global(:root) {
-    --text-color: #ffffff;
-    --bg-color: #1e1e1e;
-    --editor-bg: #2d2d2d;
-    --border-color: #333;
-    --accent-color: #0078d4;
-  }
-
-  :global(body) {
-    margin: 0;
-    padding: 0;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-  }
-
-  :global(*) {
-    box-sizing: border-box;
-  }
-
-  :global(::-webkit-scrollbar) {
-    width: 10px;
-    height: 10px;
-  }
-
-  :global(::-webkit-scrollbar-track) {
-    background: var(--bg-color);
-  }
-
-  :global(::-webkit-scrollbar-thumb) {
-    background: #444;
-    border-radius: 5px;
-  }
-
-  :global(::-webkit-scrollbar-thumb:hover) {
-    background: #555;
-  }
-</style>
+</style> 
